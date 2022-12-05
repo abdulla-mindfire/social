@@ -1,4 +1,5 @@
 import "./closeFriend.css";
+import extUri from "../../config"
 
 export default function CloseFriend({user}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER || extUri().PF;;

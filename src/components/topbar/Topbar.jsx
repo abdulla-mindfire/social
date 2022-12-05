@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Modal from '../modal/Modal'
+import extUri from "../../config"
 
 export default function Topbar() {
   const {user} = useContext(AuthContext)

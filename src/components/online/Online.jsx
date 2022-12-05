@@ -1,4 +1,5 @@
 import "./online.css";
+import extUri from "../../config"
 
 export default function Online({user}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER || extUri().PF;;

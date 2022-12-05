@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import { loginCall } from "../../apiCalls";
 import {AuthContext} from "../../context/AuthContext"
 import {CircularProgress} from "@material-ui/core"
+import Modal from "../../components/modal/Modal"
 
 export default function Login() {
   const username = useRef();
@@ -31,12 +32,12 @@ export default function Login() {
             <input placeholder="Password" type="password" className="loginInput" ref={password} required />
             <button disabled={isFetching} type="submit" className="loginButton">{isFetching ? <CircularProgress color="white" size="20px" /> : "Log In"}</button>
             <span className="loginForgot">Forgot Password?</span>
-            {/* <Link to="/register"> */}
+          </form>
+            <Link className="loginRegisterButton" to="/register">
               <button disabled={isFetching} className="loginRegisterButton">
                 Create a New Account
               </button>
-            {/* </Link> */}
-          </form>
+            </Link>
         </div>
       </div>
     </div>

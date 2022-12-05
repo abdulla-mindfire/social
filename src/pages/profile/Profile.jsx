@@ -17,7 +17,7 @@ const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
 export default function Profile() {
   const {user:currentUser} = useContext(AuthContext)
   const [user, setUser] = useState(null)
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER || extUri().PF;;
   let { id } = useParams();
 
   const getProfile = async () => {

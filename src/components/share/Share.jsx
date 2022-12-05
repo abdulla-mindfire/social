@@ -6,7 +6,7 @@ import axios from 'axios'
 
 import extUri from '../../config'
 
-const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+const PF = process.env.REACT_APP_PUBLIC_FOLDER || extUri().PF;;
 const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
 
 export default function Share() {

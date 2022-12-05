@@ -7,7 +7,7 @@ import Modal from '../modal/Modal'
 
 export default function Topbar() {
   const {user} = useContext(AuthContext)
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER || extUri().PF;;
 
   console.log(user,'====')
 

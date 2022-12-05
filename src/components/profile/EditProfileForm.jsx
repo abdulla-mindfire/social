@@ -14,7 +14,7 @@ import { TextField,
 import extUri from '../../config'
 
 export default function EditProfileForm() {
-  const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
+  const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
   const { user:currentUser } = useContext(AuthContext)
   const [profile, setProfile] = useState({})
   const { id } = useParams()

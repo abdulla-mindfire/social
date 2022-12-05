@@ -19,7 +19,7 @@ import {AuthContext} from '../../context/AuthContext'
 import extUri from '../../config'
 
 export default function Sidebar() {
-  const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
+  const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
   const [friends, setFriends] = useState([])
   const {user} = useContext(AuthContext)
 

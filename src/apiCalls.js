@@ -1,7 +1,7 @@
 import axios from 'axios'
 import extUri from "./config"
 
-const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
+const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
 
 export const loginCall = async (userCreds, dispatch) => {
     dispatch({ type: "LOGIN_START" })

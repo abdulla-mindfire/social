@@ -10,7 +10,7 @@ import extUri from '../../config'
 
 export default function Editprofile() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-    const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
+    const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
     const { id } = useParams()
 
     return (

@@ -6,7 +6,7 @@ import extUri from '../../config'
 export default function Conversation({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE;
+  const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE;
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser.id);

@@ -42,5 +42,4 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000/api"
-}
+  "proxy": "https://abdulla783.pythonanywhere.com/api"

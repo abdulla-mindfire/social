@@ -4,8 +4,10 @@ import {AuthContext} from "../../context/AuthContext"
 import { useContext, useRef, useState } from "react";
 import axios from 'axios'
 
+import extUri from '../../config'
+
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-const API_BE = process.env.REACT_APP_API_BE
+const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
 
 export default function Share() {
   const { user } = useContext(AuthContext)

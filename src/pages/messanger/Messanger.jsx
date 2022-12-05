@@ -8,8 +8,9 @@ import { useContext, useEffect, useCallback, useRef, useState } from "react";
 // import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import extUri from '../../config'
 
-const API_BE = process.env.REACT_APP_API_BE;
+const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE;
 
 export default function Messanger() {
     // const [socketUrl, setSocketUrl] = useState('ws://localhost:8000/');

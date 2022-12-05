@@ -6,10 +6,11 @@ import axios from 'axios'
 import {AuthContext} from '../../context/AuthContext'
 import {Link} from "react-router-dom"
 import { Add, Remove, Edit } from "@material-ui/icons";
+import extUri from '../../config'
 
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const API_BE = process.env.REACT_APP_API_BE
+  const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
   const [friends, setFriends] = useState([])
   const {user:currentUser, dispatch} = useContext(AuthContext)
   

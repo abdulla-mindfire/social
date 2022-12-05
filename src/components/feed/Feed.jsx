@@ -5,8 +5,9 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import extUri from '../../config'
 
-const API_BE = process.env.REACT_APP_API_BE
+const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
 
 export default function Feed({user_id}) {
   const [posts, setPosts] = useState([])

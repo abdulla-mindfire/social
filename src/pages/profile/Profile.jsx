@@ -10,8 +10,9 @@ import {useParams} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { PhotoCamera } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
+import extUri from '../../config'
 
-const API_BE = process.env.REACT_APP_API_BE
+const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
 
 export default function Profile() {
   const {user:currentUser} = useContext(AuthContext)

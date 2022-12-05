@@ -2,8 +2,9 @@ import "./register.css";
 import {useRef} from 'react'
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
+import extUri from '../../config'
 
-const API_BE = process.env.REACT_APP_API_BE
+const API_BE = process.env.REACT_APP_API_BE || extUri.API_BE
 
 export default function Register() {
   const username = useRef();

@@ -9,7 +9,9 @@ export const loginCall = async (userCreds, dispatch) => {
         const res = await axios.post(API_BE + "account/login", userCreds)
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data })
         localStorage.setItem('user', JSON.stringify(res.data))
+        return res
     }catch(error){
         dispatch({ type: "LOGIN_FAILURE", payload: error })
+        return error
     }
 }

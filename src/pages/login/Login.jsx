@@ -1,6 +1,6 @@
 import "./login.css";
 import { useRef, useContext, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext"
 import { CircularProgress } from "@material-ui/core"
@@ -20,9 +20,13 @@ export default function Login() {
   const [slider, setSlider] = useState(false)
   const [formSection, setFormSection] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    loginCall({ username: username.current.value, password: password.current.value }, dispatch)
+    let res = await loginCall({ username: username.current.value, password: password.current.value }, dispatch)
+    console.log(res,'==')
+    if(res?.response?.status !== 200){
+      alert(res?.response?.data?.data[0])
+    }
   }
 
   const signUpChange = () => {
@@ -44,7 +48,7 @@ export default function Login() {
   const history = useNavigate();
 
   const handleSignUp = async (e) => {
-    e.prevenntDefault()
+    e.preventDefault()
 
     if(signUpPassword.current.value !== password2.current.value){
       signUpPassword.current.setCustomValidity("Passwords don't match!");
@@ -53,15 +57,25 @@ export default function Login() {
         username: signUpUsername.current.value,
         email: email.current.value,
         password: signUpPassword.current.value,
-        password2: password2.current.value
+        password2: password2.current.value,
+        first_name: "",
+        last_name: ""
       }
       try{
         const res = await axios.post(API_BE + "account/register", userData);
+        console.log(res,'==')
         if(res.status === 201){
-          history('/')
+          loginChange()
         }
       }catch(err){
-        console.log(err)
+        if(err.response.data?.username){
+          alert(err.response.data?.username[0])
+        }else if(err.response.data?.email){
+          alert(err.response.data?.email[0])
+        }else{
+          alert("Something went wrong please try again!")
+          window.location.reload()
+        }
       }
     }
 
@@ -94,24 +108,24 @@ export default function Login() {
             <button disabled={isFetching} className="clkbtn">{isFetching ? <CircularProgress color="white" size="20px" /> : "Log In"}</button>
           </form>
 
-          <form className="signup-box" onSubmit={handleSignUp}>
+          <form className="signup-box" onSubmit={(e)=>handleSignUp(e)}>
             <input type="text"
               className="name ele"
               ref={signUpUsername}
-              placeholder="Enter your username" />
+              placeholder="Enter your username" required />
             <input type="email"
               className="email ele"
               ref={email}
-              placeholder="youremail@email.com" />
+              placeholder="youremail@email.com" required />
             <input type="password"
               className="password ele"
               ref={signUpPassword}
-              placeholder="password" />
+              placeholder="password" required />
             <input type="password"
               ref={password2}
               className="password ele"
-              placeholder="Confirm password" />
-            <button className="clkbtn">Signup</button>
+              placeholder="Confirm password" required />
+            <button type="submit" className="clkbtn">Signup</button>
           </form>
         </div>
       </div>

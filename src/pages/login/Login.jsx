@@ -1,43 +1,118 @@
 import "./login.css";
-import { useRef, useContext } from "react"
-import {Link} from "react-router-dom";
+import { useRef, useContext, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { loginCall } from "../../apiCalls";
-import {AuthContext} from "../../context/AuthContext"
-import {CircularProgress} from "@material-ui/core"
+import { AuthContext } from "../../context/AuthContext"
+import { CircularProgress } from "@material-ui/core"
 import Modal from "../../components/modal/Modal"
+import axios from "axios";
+
+import extUri from '../../config'
+
+const API_BE = process.env.REACT_APP_API_BE || extUri().API_BE
 
 export default function Login() {
+  // Login Section
   const username = useRef();
   const password = useRef();
-  const {user, isFetching, error, dispatch} = useContext(AuthContext)
+  const { user, isFetching, error, dispatch } = useContext(AuthContext)
+
+  const [slider, setSlider] = useState(false)
+  const [formSection, setFormSection] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     loginCall({ username: username.current.value, password: password.current.value }, dispatch)
   }
 
+  const signUpChange = () => {
+    setSlider(true)
+    setFormSection(true)
+  }
+
+  const loginChange = () => {
+    setSlider(false)
+    setFormSection(false)
+  }
+
+
+  // Signup Section 
+  const signUpUsername = useRef();
+  const email = useRef();
+  const signUpPassword = useRef();
+  const password2 = useRef();
+  const history = useNavigate();
+
+  const handleSignUp = async (e) => {
+    e.prevenntDefault()
+
+    if(signUpPassword.current.value !== password2.current.value){
+      signUpPassword.current.setCustomValidity("Passwords don't match!");
+    }else{
+      const userData = {
+        username: signUpUsername.current.value,
+        email: email.current.value,
+        password: signUpPassword.current.value,
+        password2: password2.current.value
+      }
+      try{
+        const res = await axios.post(API_BE + "account/register", userData);
+        if(res.status === 201){
+          history('/')
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+  }
 
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">Saimsocial</h3>
-          <span className="loginDesc">
-            Connect with friends and the world around you on Lamasocial.
-          </span>
+    <div className="body">
+      <header>
+        <h1 className="heading">Saim Social</h1>
+        <h3 className="title">Please login or create a new account!</h3>
+      </header>
+
+      <div className="container">
+        <div className={slider ? "slider moveslider" : "slider"}></div>
+        <div className="btn">
+          <button onClick={loginChange} className="login">Login</button>
+          <button onClick={signUpChange} className="signup">Signup</button>
         </div>
-        <div className="loginRight">
-          <form className="loginBox" onSubmit={handleSubmit}>
-            <input placeholder="Username" type="text" className="loginInput" ref={username} required />
-            <input placeholder="Password" type="password" className="loginInput" ref={password} required />
-            <button disabled={isFetching} type="submit" className="loginButton">{isFetching ? <CircularProgress color="white" size="20px" /> : "Log In"}</button>
-            <span className="loginForgot">Forgot Password?</span>
+
+        <div className={formSection? "form-section form-section-move": "form-section"}>
+          <form className="login-box" onSubmit={handleSubmit}>
+            <input type="text"
+              className="email ele"
+              ref={username} 
+              placeholder="Username" required/>
+            <input type="password"
+              className="password ele"
+              ref={password} 
+              placeholder="password" required />
+            <button disabled={isFetching} className="clkbtn">{isFetching ? <CircularProgress color="white" size="20px" /> : "Log In"}</button>
           </form>
-            <Link className="loginRegisterButton" to="/register">
-              <button disabled={isFetching} className="loginRegisterButton">
-                Create a New Account
-              </button>
-            </Link>
+
+          <form className="signup-box" onSubmit={handleSignUp}>
+            <input type="text"
+              className="name ele"
+              ref={signUpUsername}
+              placeholder="Enter your username" />
+            <input type="email"
+              className="email ele"
+              ref={email}
+              placeholder="youremail@email.com" />
+            <input type="password"
+              className="password ele"
+              ref={signUpPassword}
+              placeholder="password" />
+            <input type="password"
+              ref={password2}
+              className="password ele"
+              placeholder="Confirm password" />
+            <button className="clkbtn">Signup</button>
+          </form>
         </div>
       </div>
     </div>

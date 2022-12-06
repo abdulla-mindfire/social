@@ -1,0 +1,23 @@
+<div className="login">
+    <div className="loginWrapper">
+      <div className="loginLeft">
+        <h3 className="loginLogo">Saimsocial</h3>
+        <span className="loginDesc">
+          Connect with friends and the world around you on Lamasocial.
+        </span>
+      </div>
+      <div className="loginRight">
+        <form className="loginBox" onSubmit={handleSubmit}>
+          <input placeholder="Username" type="text" className="loginInput" ref={username} required />
+          <input placeholder="Password" type="password" className="loginInput" ref={password} required />
+          <button disabled={isFetching} type="submit" className="loginButton">{isFetching ? <CircularProgress color="white" size="20px" /> : "Log In"}</button>
+          <span className="loginForgot">Forgot Password?</span>
+        </form>
+          <Link className="loginRegisterButton" to="/register">
+            <button disabled={isFetching} className="loginRegisterButton">
+              Create a New Account
+            </button>
+          </Link>
+      </div>
+    </div>
+  </div>

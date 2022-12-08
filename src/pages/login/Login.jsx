@@ -23,8 +23,7 @@ export default function Login() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     let res = await loginCall({ username: username.current.value, password: password.current.value }, dispatch)
-    console.log(res,'==')
-    if(res?.response?.status !== 200){
+    if(res?.status !== 200){
       alert(res?.response?.data?.data[0])
     }
   }

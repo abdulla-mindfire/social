@@ -40,7 +40,7 @@ export default function Topbar() {
     window.location.reload()    
   }
 
-  console.log(user,'====')
+  // console.log(user,'====')
 
   return (
     <div className="topbarContainer">

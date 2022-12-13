@@ -77,12 +77,7 @@ export default function Rightbar({ user }) {
         <h4 className="rightbarTitle">Friends to Follow</h4>
         <ul className="rightbarFriendList">
           {friendsToFollow.map((u) => (
-            u.first_name !== "" ? <><Link style={{ textDecoration: "none", color: "black" }} key={u.id} to={`/profile/${u?.id}`}><Online user={u} /></Link>{user.user.id != currentUser.id && (
-              <button className="rightbarFollowbutton" onClick={handleClick}>
-                {followed ? "UnFollow" : "Follow"}
-                {followed ? <Remove /> : <Add />}
-              </button>
-            )}</> : ""
+            u.first_name !== "" ? <Link style={{ textDecoration: "none", color: "black" }} key={u.id} to={`/profile/${u?.id}`}><Online user={u} /></Link> : ""
           ))}
         </ul>
       </>

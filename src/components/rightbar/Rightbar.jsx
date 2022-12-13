@@ -111,6 +111,7 @@ export default function Rightbar({ user }) {
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
           {friends?.map((friend) => (
+            <>
             <Link style={{ textDecoration: "none", color: "black" }} key={friend.id} to={`/profile/${friend?.id}`}>
               <div className="rightbarFollowing">
                 <img
@@ -121,6 +122,13 @@ export default function Rightbar({ user }) {
                 <span className="rightbarFollowingName">{friend?.first_name} {friend?.last_name}</span>
               </div>
             </Link>
+            {user.user.id != currentUser.id && (
+              <button className="rightbarFollowbutton" onClick={handleClick}>
+                {followed ? "UnFollow" : "Follow"}
+                {followed ? <Remove /> : <Add />}
+              </button>
+            )}
+            </>
           ))}
         </div>
       </>
